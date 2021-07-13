@@ -485,3 +485,18 @@ html {
   background: white;
   margin-top: 10px;
 }
+.show-side-nav html {
+  overflow-y: hidden;
+}
+.show-side-nav::-webkit-scrollbar {
+  width: auto;
+}
+::-webkit-scrollbar-track {
+  background: #26022b 100%;
+}
+::-webkit-scrollbar-thumb {
+  background: #26022b 100%;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0);
+}

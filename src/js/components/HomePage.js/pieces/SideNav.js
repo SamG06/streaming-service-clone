@@ -1,3 +1,5 @@
+import { scrollStopper } from "../../../tools";
+
 const pages1 = [
   "Home",
   "Series",
@@ -48,12 +50,12 @@ const SideNavHTML = /*html*/ `
 `;
 
 showHideToggle = () => {
-  const root = document.getElementById("root");
   const sideNav = document.querySelector(".side-nav");
 
   const toggle = () => {
-    root.classList.toggle("show-side-nav");
+    document.body.classList.toggle("show-side-nav");
     sideNav.scrollTo(0, 0);
+    scrollStopper();
   };
 
   const toggleClicks = document.querySelectorAll(".toggle-nav");

@@ -157,6 +157,25 @@ ${ItemsSection_default.html}
   };
   var HomeMain_default = HomeMain;
 
+  // src/js/tools.js
+  var stringToHTML = (html) => document.createRange().createContextualFragment(html);
+  var recentEventFunction = null;
+  var scrollStopper = () => {
+    const currentY = document.documentElement.scrollTop;
+    const stopScroll = () => {
+      window.scrollTo(0, currentY);
+    };
+    if (!recentEventFunction) {
+      recentEventFunction = stopScroll;
+      console.log("adding");
+      window.addEventListener("scroll", recentEventFunction);
+    } else {
+      console.log("removing");
+      window.removeEventListener("scroll", recentEventFunction);
+      recentEventFunction = null;
+    }
+  };
+
   // src/js/components/HomePage.js/pieces/SideNav.js
   var pages1 = [
     "Home",
@@ -204,11 +223,11 @@ ${ItemsSection_default.html}
     </nav>
 `;
   showHideToggle = () => {
-    const root2 = document.getElementById("root");
     const sideNav = document.querySelector(".side-nav");
     const toggle = () => {
-      root2.classList.toggle("show-side-nav");
+      document.body.classList.toggle("show-side-nav");
       sideNav.scrollTo(0, 0);
+      scrollStopper();
     };
     const toggleClicks = document.querySelectorAll(".toggle-nav");
     toggleClicks.forEach((el) => el.addEventListener("click", toggle));
@@ -319,13 +338,9 @@ ${ItemsSection_default.html}
   };
   var WhosWatching_default = WhosWatching;
 
-  // src/js/tools.js
-  var stringToHTML = (html) => document.createRange().createContextualFragment(html);
-  var tools_default = stringToHTML;
-
   // src/js/index.js
   var root = document.getElementById("root");
-  var mainHTML = tools_default(`${LoadingIntro_default.html}${WhosWatching_default.html}${SideNav_default.html}${HomeMain_default.html}`);
+  var mainHTML = stringToHTML(`${LoadingIntro_default.html}${WhosWatching_default.html}${SideNav_default.html}${HomeMain_default.html}`);
   root.append(mainHTML);
   function autoRun(funcs) {
     funcs.forEach((func) => func());
