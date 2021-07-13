@@ -1,0 +1,31 @@
+.initial-loading-page{
+    background: linear-gradient(89.85deg, #912FEA 12.86%, #6410D1 36.33%, #5104C7 53.65%, #426BD4 87.41%);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.initial-loading-page svg{
+    width: 70%;
+    max-width: 450px;
+}
+.loading-dots{
+    position: absolute;
+    bottom:80px;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.loading-dots div{
+    border-radius: 100%;
+    background: #6526d1;
+    height: 13px;
+    width: 13px;
+    transition: background .3s;
+}

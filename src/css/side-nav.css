@@ -1,0 +1,75 @@
+.side-nav-transparent-overlay {
+  position: fixed;
+  z-index: 51;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.384);
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  display: none;
+}
+
+.show-side-nav .side-nav-transparent-overlay {
+  display: block;
+}
+
+.side-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background: rgb(15 15 15);
+  z-index: 52;
+  overflow-y: scroll;
+  transition: transform 0.1s linear;
+  cursor: pointer;
+  transform: translateY(60px);
+  transform: translateX(-100%) translateY(60px);
+}
+
+.show-side-nav .side-nav {
+  transform: translateX(0) translateY(60px);
+}
+
+.hide-nav-overlay {
+  display: none;
+}
+
+.close-icon svg {
+  cursor: pointer;
+  width: 42px;
+  height: 17px;
+}
+
+.pages-buttons {
+  color: rgb(206, 206, 206);
+  font-size: 29px;
+  font-weight: 300;
+  display: flex;
+  flex-flow: column;
+  margin-left: 68px;
+
+  width: 270px;
+}
+
+.pages-buttons section {
+  border-bottom: 1.5px solid rgb(51, 51, 51);
+  padding-bottom: 20px;
+}
+
+.pages-buttons div:hover {
+  color: #9e86ff;
+  font-weight: 600;
+}
+
+.pages-buttons div {
+  margin-top: 15px;
+  color: rgb(153, 153, 153);
+}
+
+.pages-buttons div:first-child {
+  margin-top: 0;
+}

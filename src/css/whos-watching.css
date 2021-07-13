@@ -1,0 +1,119 @@
+.whos-watching{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to right bottom, #0f0f0f, #171425, #1e163a, #27164e, #341362);
+}
+
+.whos-watching h2{
+    font-weight: 400;
+    color: white;
+    margin-top: 30px;
+    font-size: 50px;
+    user-select: none;
+}
+
+.whos-watching svg{
+    width: 150px;
+    margin-top: 30px;
+}
+
+.user-circle-container{
+    margin-top: auto;
+    display: flex;
+    flex-flow: column;
+}
+
+.user-circle-container:hover .name-tiny{
+    transform: translateY(10px);
+
+}
+/* circle */
+.user-circle{
+    width: 170px;
+    height: 170px;
+    border-radius: 100%;
+    border: 6px solid rgb(202, 68, 214);
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 50px;
+    font-weight: 200;
+    cursor: pointer;
+    user-select: none;
+    transform: scale(1);
+    transition: transform .2s linear;
+    background: rgba(255, 255, 255, 0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    will-change: transform;  
+    align-self: center;
+    justify-self: center;
+    
+}
+
+.user-circle:hover{
+    transform: scale(1.2) translate3d( 0, 0, 0) perspective(1px);
+}
+
+.add-user-container{
+    margin-top: auto;
+    margin-bottom: 60px;
+}
+
+.name-tiny{
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    transition: transform .2s linear;
+
+}
+.add-buttons button{
+    width: 200px;
+    padding:10px;
+    height: 42px;
+    background: rgb(94 68 141);
+    border:none;
+    border-radius: 100px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    display: inline-flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-buttons svg{
+    margin:0;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.add-buttons button:first-child{
+    margin-right: 40px;
+}
+.add-buttons button:hover{
+    background: rgb(91, 28, 230);
+}
+
+.manage-profiles{
+    color: purple;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(158, 134, 255);
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.manage-profiles:hover{
+    color: white;
+}
+

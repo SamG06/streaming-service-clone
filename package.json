@@ -1,0 +1,18 @@
+{
+  "name": "streaming-service",
+  "version": "1.0.0",
+  "description": "streaming service clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild ./src/js/index.js --outfile=/out/out.js --bundle --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.12.14"
+  },
+  "devDependencies": {
+    "esbuild-serve": "^1.0.1"
+  }
+}
