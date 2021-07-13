@@ -400,6 +400,12 @@ h4 {
   transform: translateY(60px);
   transform: translateX(-100%) translateY(60px);
 }
+.side-nav section {
+  margin-top: 15px;
+}
+.side-nav section:first-child {
+  margin-top: 0px;
+}
 .show-side-nav .side-nav {
   transform: translateX(0) translateY(60px);
 }

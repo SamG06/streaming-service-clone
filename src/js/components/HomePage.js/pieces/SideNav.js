@@ -30,24 +30,19 @@ const pages2 = [
   "Suspense",
 ];
 
+const listPages = (pages) => {
+  return `
+  <section>
+    ${pages.map((page) => `<div class="page-button">${page}</div>`).join("")}
+  </section>
+  `;
+};
+
 const SideNavHTML = /*html*/ `
     <div class="side-nav-transparent-overlay hide-nav-overlay toggle-nav"></div>
     <nav class="side-nav hide-side-nav">
         <div class="pages-buttons">
-          <section>
-              ${pages1
-                .map((page) => {
-                  return `<div class="page-button">${page}</div>`;
-                })
-                .join("")}
-          </section>
-          <section>
-              ${pages2
-                .map((page) => {
-                  return `<div class="page-button">${page}</div>`;
-                })
-                .join("")}
-          </section>
+          ${[pages1, pages2].map((pages) => listPages(pages)).join("")}
         </div>
     </nav>
 `;
