@@ -442,6 +442,39 @@ h4 {
   margin-top: 0;
 }
 
+/* src/css/media-section.css */
+.media-content {
+  margin-top: 100px;
+}
+.media-container * {
+  border: 2px red solid;
+}
+.media-container {
+  overflow-x: scroll;
+  margin: 20px;
+  width: 90%;
+  border: 2px red solid;
+}
+.media-container .media-card:nth-child(2n) {
+  background: green;
+}
+.media-container::-webkit-scrollbar {
+  display: none;
+}
+.media-card {
+  width: 200px;
+  height: 300px;
+  background: white;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+.media-rolling-container {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  transition: 0.2s;
+}
+
 /* src/css/main.css */
 * {
   box-sizing: border-box;
@@ -478,12 +511,6 @@ html {
 .home-page {
   background: linear-gradient(115.92deg, #000000 19.56%, #170146 51.9%, #4a0254 100%);
   background-attachment: fixed;
-}
-.movie-card {
-  width: 200px;
-  height: 300px;
-  background: white;
-  margin-top: 10px;
 }
 .show-side-nav html {
   overflow-y: hidden;

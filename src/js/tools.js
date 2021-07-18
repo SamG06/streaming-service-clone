@@ -12,11 +12,15 @@ export const scrollStopper = () => {
 
   if (!recentEventFunction) {
     recentEventFunction = stopScroll;
-    console.log("adding");
     window.addEventListener("scroll", recentEventFunction);
   } else {
-    console.log("removing");
     window.removeEventListener("scroll", recentEventFunction);
     recentEventFunction = null;
   }
+};
+
+export const devSettings = {
+  showHomepage: true,
+  disableLoading: true,
+  showWhosWatching: false,
 };

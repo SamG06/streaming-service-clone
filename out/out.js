@@ -1,4 +1,26 @@
 (() => {
+  // src/js/tools.js
+  var stringToHTML = (html) => document.createRange().createContextualFragment(html);
+  var recentEventFunction = null;
+  var scrollStopper = () => {
+    const currentY = document.documentElement.scrollTop;
+    const stopScroll = () => {
+      window.scrollTo(0, currentY);
+    };
+    if (!recentEventFunction) {
+      recentEventFunction = stopScroll;
+      window.addEventListener("scroll", recentEventFunction);
+    } else {
+      window.removeEventListener("scroll", recentEventFunction);
+      recentEventFunction = null;
+    }
+  };
+  var devSettings = {
+    showHomepage: true,
+    disableLoading: true,
+    showWhosWatching: false
+  };
+
   // src/js/components/HomePage.js/pieces/CircleButtons.js
   var playButton = `
   <div class="play-button">
@@ -52,32 +74,66 @@
   };
   var HeroBanner_default = HeroBanner;
 
-  // src/js/components/HomePage.js/pieces/ItemsSection/ItemsSection.js
-  var ItemSectionHTML = `<div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  <div class="movie-card"></div>
-  </div>`;
-  var ItemSection = {
-    html: ItemSectionHTML
+  // src/js/components/HomePage.js/pieces/MediaSection/MediaSection.js
+  var MediaSectionHTML = `
+
+<div class="media-content">
+<button id="next">next</button>
+  <div class="media-container">
+
+    <div class="media-rolling-container">
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+      <div class="media-card"></div>
+    </div>
+  </div>
+</div>`;
+  var MediaSection = {
+    html: MediaSectionHTML
   };
-  var ItemsSection_default = ItemSection;
+  var sliderLogic = (e) => {
+    const query = `.media-rolling-container .media-card:last-child`;
+    const lastMedia = document.querySelector(query);
+    const lastMediaPosition = lastMedia.getBoundingClientRect().x;
+    const lastMediaWidth = lastMedia.offsetWidth;
+    const mediaContainer = document.querySelector(".media-container");
+    const mediaContainerPosition = mediaContainer.getBoundingClientRect().x;
+    const mediaContainerWidth = mediaContainer.offsetWidth;
+    console.log(mediaContainerWidth, "width");
+    const positionToLastElement = Math.round(mediaContainerWidth - lastMediaPosition + mediaContainerPosition - lastMediaWidth);
+    const howManyShow = mediaContainerWidth / (lastMediaWidth + 10);
+    console.log(howManyShow, "how many shown");
+    const howManyToShow = document.querySelectorAll(".media-container .media-card").length * (lastMediaWidth + 10) - mediaContainerWidth;
+    console.log(howManyToShow, "how many to show");
+    console.log(howManyShow * lastMediaWidth + 10 + 100);
+    const nextSection = Math.floor(howManyShow) * lastMediaWidth;
+    const roll = document.querySelector(".media-rolling-container");
+    roll.style.transform = `translateX(-${nextSection}px)`;
+  };
+  document.addEventListener("DOMContentLoaded", (event) => {
+    document.getElementById("next").addEventListener("click", sliderLogic);
+  });
+  var MediaSection_default = MediaSection;
 
   // src/js/components/Logo.js
   var logo = `<svg class="svg-logo" viewBox="0 0 204 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,34 +203,18 @@
   var TopBar_default = TopBar;
 
   // src/js/components/HomePage.js/HomeMain.js
-  var HomeMainHTML = `<div class="home-page">
-${TopBar_default.html}
+  var { showHomepage } = devSettings;
+  var displayNone = showHomepage ? "" : 'style="display:none';
+  var HomeMainHTML = `
+<div class="home-page" ${displayNone}">
+${TopBar_default.html}  
 ${HeroBanner_default.html}
-${ItemsSection_default.html}
+${MediaSection_default.html}
 </div>`;
   var HomeMain = {
     html: HomeMainHTML
   };
   var HomeMain_default = HomeMain;
-
-  // src/js/tools.js
-  var stringToHTML = (html) => document.createRange().createContextualFragment(html);
-  var recentEventFunction = null;
-  var scrollStopper = () => {
-    const currentY = document.documentElement.scrollTop;
-    const stopScroll = () => {
-      window.scrollTo(0, currentY);
-    };
-    if (!recentEventFunction) {
-      recentEventFunction = stopScroll;
-      console.log("adding");
-      window.addEventListener("scroll", recentEventFunction);
-    } else {
-      console.log("removing");
-      window.removeEventListener("scroll", recentEventFunction);
-      recentEventFunction = null;
-    }
-  };
 
   // src/js/components/HomePage.js/pieces/SideNav.js
   var pages1 = [
@@ -245,6 +285,7 @@ ${ItemsSection_default.html}
                         <div></div>               
                         </div>`;
   var loadingHTML = `<div class="initial-loading-page">${Logo_default}${loadingDots}</div>`;
+  var loadingTime = devSettings.disableLoading ? 0 : 2e3;
   var dotInterval = null;
   function changeLoading() {
     const loading = document.querySelector(".initial-loading-page");
@@ -253,7 +294,7 @@ ${ItemsSection_default.html}
       loading.style.display = "none";
       clearInterval(dotInterval);
       console.log("changed");
-    }, 0);
+    }, loadingTime);
   }
   var sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -300,8 +341,10 @@ ${ItemsSection_default.html}
 <rect y="17" width="3" height="32" transform="rotate(-90 0 17)" fill="#C4C4C4"/>
 </svg>
 `;
+  var { showWhosWatching } = devSettings;
+  var displayNone2 = showWhosWatching ? "" : 'style="display:none;"';
   var whosWatchingHtml = `
-    <div class="whos-watching" style="display:none;">
+    <div class="whos-watching" ${displayNone2} >
         ${Logo_default}
         <h2>Who Is Watching?</h2>
         <div class="user-circle-container">

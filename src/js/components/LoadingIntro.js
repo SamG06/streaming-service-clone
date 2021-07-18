@@ -1,3 +1,4 @@
+import { devSettings } from "../tools";
 import logo from "./Logo";
 
 const loadingDots = `<div class="loading-dots">
@@ -8,6 +9,7 @@ const loadingDots = `<div class="loading-dots">
 
 const loadingHTML = `<div class="initial-loading-page">${logo}${loadingDots}</div>`;
 
+const loadingTime = devSettings.disableLoading ? 0 : 2000;
 let dotInterval = null;
 function changeLoading() {
   const loading = document.querySelector(".initial-loading-page");
@@ -16,7 +18,7 @@ function changeLoading() {
     loading.style.display = "none";
     clearInterval(dotInterval);
     console.log("changed");
-  }, 0); // 2000
+  }, loadingTime); // 2000
 }
 
 const sleep = (milliseconds) => {

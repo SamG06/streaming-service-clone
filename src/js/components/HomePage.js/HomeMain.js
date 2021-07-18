@@ -1,11 +1,17 @@
+import { devSettings } from "../../tools";
 import HeroBanner from "./pieces/HeroBanner";
-import ItemSection from "./pieces/ItemsSection/ItemsSection";
+import MediaSection from "./pieces/MediaSection/MediaSection";
 import TopBar from "./pieces/TopBar";
 
-const HomeMainHTML = `<div class="home-page">
-${TopBar.html}
+const { showHomepage } = devSettings;
+
+const displayNone = showHomepage ? "" : 'style="display:none';
+
+const HomeMainHTML = /*HTML*/ `
+<div class="home-page" ${displayNone}">
+${TopBar.html}  
 ${HeroBanner.html}
-${ItemSection.html}
+${MediaSection.html}
 </div>`;
 
 const HomeMain = {
