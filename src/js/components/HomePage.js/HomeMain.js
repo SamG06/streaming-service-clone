@@ -9,9 +9,9 @@ const displayNone = showHomepage ? "" : 'style="display:none';
 
 const HomeMainHTML = /*HTML*/ `
 <div class="home-page" ${displayNone}">
-${TopBar.html}  
-${HeroBanner.html}
-${MediaSection.html}
+  ${TopBar.html}  
+  ${HeroBanner.html}
+  ${MediaSection.html}
 </div>`;
 
 const HomeMain = {

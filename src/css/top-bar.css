@@ -154,3 +154,23 @@
 .show-side-nav .top-bar {
   background: rgb(15 15 15);
 }
+
+/* MOBILE STYLE */
+@media only screen and (max-width: 750px) {
+  .top-bar {
+    background: black;
+  }
+  .hamburger {
+    left: 15px;
+  }
+  .user-profile {
+    right: 0;
+  }
+  .user-profile p {
+    display: none;
+  }
+
+  .search-icon {
+    display: none;
+  }
+}

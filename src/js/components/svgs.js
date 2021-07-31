@@ -18,3 +18,17 @@ export const HamburgerIcon = `<div class="hamburger toggle-nav">
 <line x1="0.65" y1="15.35" x2="17.35" y2="15.35" stroke="#DCDCDC" stroke-width="1.3" stroke-linecap="round"/>
 <line x1="0.65" y1="8.35" x2="11.35" y2="8.35" stroke="#DCDCDC" stroke-width="1.3" stroke-linecap="round"/>
 </svg></div>`;
+
+export const previousSVG = `  <div class="arrow-container" id="previous">
+<svg class="arrow"  width="68" height="113" viewBox="0 0 68 113" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="59.3535" y1="104.392" x2="8.62926" y2="58.5162" stroke="white" stroke-width="11" stroke-linecap="round"/>
+<line x1="54.5292" y1="7.7675" x2="8.7675" y2="58.5945" stroke="white" stroke-width="11" stroke-linecap="round"/>
+</svg>
+</div>`;
+
+export const forwardSVG = `  <div class="arrow-container" id="next">
+<svg class="arrow"  width="67" height="111" viewBox="0 0 67 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="7.7684" y1="5.61008" x2="58.4926" y2="51.4856" stroke="white" stroke-width="11" stroke-linecap="round"/>
+<line x1="12.5927" y1="102.234" x2="58.3544" y2="51.4073" stroke="white" stroke-width="11" stroke-linecap="round"/>
+</svg>
+</div>`;

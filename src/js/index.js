@@ -5,7 +5,7 @@ import TopBar from "./components/HomePage.js/pieces/TopBar";
 import LoadingIntro from "./components/LoadingIntro";
 import logo from "./components/Logo";
 import WhosWatching from "./components/WhosWatching";
-import { stringToHTML } from "./tools";
+import { movieData, stringToHTML } from "./tools";
 const root = document.getElementById("root");
 
 // Initial Setup
@@ -25,3 +25,5 @@ autoRun(LoadingIntro.autoRunFunctions);
 autoRun(WhosWatching.autoRunFunctions);
 
 autoRun(SideNav.autoRunFunctions);
+
+movieData();
