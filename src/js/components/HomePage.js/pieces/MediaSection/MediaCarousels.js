@@ -37,12 +37,10 @@ const mediaContainer = (sectionTitle, id) => {
     <h2>${sectionTitle}</h2>
     ${previousSVG}
       <div class="media-carousel" id="${id}">
-        ${new Array(100)
-          .fill("")
-          .map((meh, index) => {
-            return `<div class="media-card placeholder"></div>`;
-          })
-          .join("")}
+        ${Array.from({ length: 30 }, () => [
+          `<div class="media-card placeholder"></div>`,
+        ])
+        .join("")}
       </div>
     ${forwardSVG}
     </div>
@@ -160,4 +158,5 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     document.getElementById(id).innerHTML = ids.join("");
   });
+  console.log("crying");
 });

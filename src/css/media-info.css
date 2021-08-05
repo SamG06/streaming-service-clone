@@ -1,0 +1,10 @@
+.media-info-section {
+  background: black;
+  display: none;
+}
+
+.info-hero-banner img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+}

@@ -1,4 +1,5 @@
-import { api_key } from "../../../../tools";
+import { api_key, mediaInfoPageData } from "../../../../tools";
+import { showComponentForRoute } from "../../../routes";
 
 const fetchVideoLink = async (id, type) => {
   const response = await fetch(
@@ -25,19 +26,23 @@ export const createMediaCard = async (
 
   const videoLink = await fetchVideoLink(id, type);
 
-  return `
+  return /*html*/ `
           <div class="media-card" data-id="${id}">
           <a
-             href="${videoLink}"
-               target="_blank"
-               rel="noopener noreferrer"
+             href="/media-info/${id}"
+             onclick="gotoMediaInfo(this, ${id}, '${type}'); return false;"
              >
                <img
                  src="https://www.themoviedb.org/t/p/w220_and_h330_face/${poster_path}"
                 alt="${media_name}"
+                onerror="testFunction(this, '${media_name}')"
               />
             </a>
           <div class="overlay"></div>
          </div>
         `;
+};
+
+window.testFunction = (source, name) => {
+  source.parentElement.innerText = name;
 };

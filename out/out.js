@@ -1,4 +1,4 @@
-(() => {
+var xyz = (() => {
   // src/js/tools.js
   var stringToHTML = (html) => document.createRange().createContextualFragment(html);
   var recentEventFunction = null;
@@ -30,6 +30,9 @@
   var api_key = "d208a3fe240766f14fc979daf33da1f3";
   var popular_movies = `https://api.themoviedb.org/3`;
   var movieData = () => getData(popular_movies);
+  var mediaInfoPageData = async (type, id) => {
+    return await getData(`/${type}/${id}?api_key=d208a3fe240766f14fc979daf33da1f3&language=en-US`);
+  };
 
   // src/js/components/HomePage.js/pieces/CircleButtons.js
   var playButton = `
@@ -77,12 +80,89 @@
     </div>
   </div>
 </div>
-  <video class="hero-video" src="movie.mp4" autoplay  playsinline muted></video>
+  <video class="hero-video" src="/movie.mp4" autoplay  playsinline muted></video>
 </section>`;
   var HeroBanner = {
     html: HeroBannerHTML
   };
   var HeroBanner_default = HeroBanner;
+
+  // src/js/components/routes.js
+  var routes = [
+    {
+      path: "/",
+      component: ".home-page"
+    },
+    {
+      path: "/media-info/:id",
+      component: ".media-info-section"
+    }
+  ];
+  var getCurrentRoute = () => {
+    const url = window.location.pathname;
+    const regex = "([a-zA-Z0-9-_]+)$";
+    if (url == "/")
+      return routes[0];
+    let param = null;
+    const routeFound = routes.find(({ path }) => {
+      const match = url.match(`^${path.split(":")[0]}${regex}`);
+      if (match) {
+        param = match[1];
+        return true;
+      }
+    });
+    routeFound.param = param;
+    return routeFound;
+  };
+  var showComponentForRoute = () => {
+    const { path, component, param } = getCurrentRoute();
+    console.log("taco");
+    routes.forEach((route) => {
+      const el = document.querySelector(route.component);
+      const view = route.path === path ? "block" : "none";
+      el.style.display = view;
+    });
+    return { component, param };
+  };
+  window.onpopstate = () => {
+    showComponentForRoute();
+  };
+
+  // src/js/components/HomePage.js/pieces/MediaSection/MediaInfo.js
+  var MediaInfoHtml = `
+    <div class="media-info-section">
+        <div class="info-hero-banner">
+            <img class="backdrop" src="/" alt="Backdrop image of {desc}" />
+            <h2 id="mediaTitle">{title}</h2>
+            <p id="mediaDescription  ">{desc}</p>
+            
+            <div className="play-trailer">
+                ${CircleButtons_default}
+            </div>
+
+            <div className="add-to-list"></div>
+        </div>
+
+        <div className="more-like-this">
+
+        </div>
+    </div>
+`;
+  window.gotoMediaInfo = async (e, id, type) => {
+    const location = e.href;
+    if (location === window.location.href)
+      return;
+    history.pushState(id, "Generic Streaming Service", location);
+    const { component, param } = showComponentForRoute();
+    if (component === ".media-info-section") {
+      const data = await mediaInfoPageData(type, id);
+      document.querySelector(".backdrop").src = `https://www.themoviedb.org/t/p/original/${data.backdrop_path}`;
+      console.log(data.backdrop_path);
+    }
+  };
+  var MediaInfo = {
+    html: MediaInfoHtml
+  };
 
   // src/js/components/svgs.js
   var CloseIcon = (classes) => `<div class="${classes.map((c) => c).join(" ")} close-icon">
@@ -133,18 +213,21 @@
     return `
           <div class="media-card" data-id="${id}">
           <a
-             href="${videoLink}"
-               target="_blank"
-               rel="noopener noreferrer"
+             href="/media-info/${id}"
+             onclick="gotoMediaInfo(this, ${id}, '${type}'); return false;"
              >
                <img
                  src="https://www.themoviedb.org/t/p/w220_and_h330_face/${poster_path}"
                 alt="${media_name}"
+                onerror="testFunction(this, '${media_name}')"
               />
             </a>
           <div class="overlay"></div>
          </div>
         `;
+  };
+  window.testFunction = (source, name) => {
+    source.parentElement.innerText = name;
   };
 
   // src/js/components/HomePage.js/pieces/MediaSection/MediaCarousels.js
@@ -180,9 +263,9 @@
     <h2>${sectionTitle}</h2>
     ${previousSVG}
       <div class="media-carousel" id="${id}">
-        ${new Array(100).fill("").map((meh, index) => {
-      return `<div class="media-card placeholder"></div>`;
-    }).join("")}
+        ${Array.from({ length: 30 }, () => [
+      `<div class="media-card placeholder"></div>`
+    ]).join("")}
       </div>
     ${forwardSVG}
     </div>
@@ -260,6 +343,7 @@
       const ids = await Promise.all(promises);
       document.getElementById(id).innerHTML = ids.join("");
     });
+    console.log("crying");
   });
 
   // src/js/components/HomePage.js/pieces/MediaSection/MediaSection.js
@@ -326,11 +410,13 @@
   var { showHomepage } = devSettings;
   var displayNone = showHomepage ? "" : 'style="display:none';
   var HomeMainHTML = `
-<div class="home-page" ${displayNone}">
-  ${TopBar_default.html}  
+${TopBar_default.html}  
+<div class="home-page" ${displayNone}">  
   ${HeroBanner_default.html}
   ${MediaSection_default.html}
-</div>`;
+</div>
+${MediaInfo.html}
+`;
   var HomeMain = {
     html: HomeMainHTML
   };
@@ -507,7 +593,6 @@
   root.append(mainHTML);
   function autoRun(funcs) {
     funcs.forEach((func) => func());
-    console.log("auto run?");
   }
   autoRun(LoadingIntro_default.autoRunFunctions);
   autoRun(WhosWatching_default.autoRunFunctions);

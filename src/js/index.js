@@ -16,7 +16,6 @@ root.append(mainHTML);
 
 function autoRun(funcs) {
   funcs.forEach((func) => func());
-  console.log("auto run?");
 }
 
 // Effects for content

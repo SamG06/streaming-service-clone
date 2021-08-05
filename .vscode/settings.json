@@ -1,7 +1,5 @@
 {
-    "cSpell.words": [
-        "Aboxofsox",
-        "playsinline",
-        "whos"
-    ]
+  "cSpell.words": ["Aboxofsox", "playsinline", "whos"],
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+  "liveServer.settings.root": "/out"
 }

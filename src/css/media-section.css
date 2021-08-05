@@ -39,6 +39,11 @@
   overflow: hidden;
 }
 
+.media-card a {
+  font-size: 0.5em;
+  text-align: center;
+  vertical-align: bottom;
+}
 .media-card img {
   width: 100%;
   height: 100%;
