@@ -72,7 +72,7 @@
   background: rgb(46, 46, 46);
 }
 
-.media-card:first-child {
+.media-container .media-card:first-child {
   margin-left: 50px;
 }
 /* video {

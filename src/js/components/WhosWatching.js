@@ -23,8 +23,8 @@ const whosWatchingHtml = /*html*/ `
 
         <div class="add-user-container">
         <div class="add-buttons">
-        <button>${plus}ADULT</button>
-        <button>${plus}KID</button>
+        <button>${plus}MONKEY</button>
+        <button>${plus}GOAT</button>
         </div>
 
         <div class="manage-profiles">MANAGE PROFILES</div>
@@ -37,9 +37,12 @@ const userChosenEvent = () => {
   const watching = document.querySelector(".whos-watching");
   const userCircle = document.querySelector(".user-circle");
   const home = document.querySelector(".home-page");
+  const topBar = document.querySelector(".top-bar");
   userCircle.addEventListener("click", () => {
     watching.style.display = "none";
     home.style.display = "block";
+    topBar.style.display = "flex";
+    document.querySelector(".top-bar").classList.remove("display-none");
     console.log("run");
   });
 };

@@ -32,7 +32,7 @@ const disabled = {
   disableLoading: true,
   showWhosWatching: false,
 };
-export const devSettings = disabled;
+export const devSettings = enabled;
 
 // TMDB API
 
@@ -53,8 +53,17 @@ const popular_tv = `https://api.themoviedb.org/3`;
 export const tvData = () => getData(popular_tv);
 
 export const mediaInfoPageData = async (type, id) => {
-  return await getData(
-    `/${type}/${id}?api_key=d208a3fe240766f14fc979daf33da1f3&language=en-US`
+  return await getData(`/${type}/${id}?api_key=${api_key}&language=en-US`);
+};
+
+export const searchData = async (query) => {
+  const { results } = await getData(
+    `/search/multi?api_key=${api_key}&query=${query}&page=1&include_adult=false`
+  );
+
+  return results.filter(
+    ({ media_type, backdrop_path }) =>
+      media_type === "tv" || (media_type === "movie" && backdrop_path !== null)
   );
 };
 

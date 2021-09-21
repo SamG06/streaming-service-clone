@@ -1,8 +1,0 @@
-{
-  "plugins": [
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-syntax-import-meta",
-    "transform-import-css"
-  ],
-  "ignore": ["./src/css"]
-}

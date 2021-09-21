@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "streaming service clone",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild ./src/js/index.js --outfile=/out/out.js --format=iife --global-name=xyz --bundle --watch"
+    "build": "esbuild ./src/js/index.js --outfile=/out/out.js --format=iife --global-name=xyz --bundle --minify --watch"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,6 @@
     "esbuild": "^0.12.14"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/eslint-parser": "^7.14.7",
     "esbuild-serve": "^1.0.1",
     "eslint": "^7.31.0"
   }

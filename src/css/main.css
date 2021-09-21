@@ -85,3 +85,6 @@ body:before {
 }
 
 /* ROUTE HANDLING  */
+.display-none {
+  display: none !important;
+}

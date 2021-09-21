@@ -36,11 +36,11 @@ const mediaContainer = (sectionTitle, id) => {
     <div class="media-container">
     <h2>${sectionTitle}</h2>
     ${previousSVG}
-      <div class="media-carousel" id="${id}">
-        ${Array.from({ length: 30 }, () => [
-          `<div class="media-card placeholder"></div>`,
-        ])
-        .join("")}
+      <div class="media-carousel" id="${id}" data-showing="false">
+        ${Array.from(
+          { length: 30 },
+          () => `<div class="media-card placeholder"></div>`
+        ).join("")}
       </div>
     ${forwardSVG}
     </div>
@@ -145,18 +145,42 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     });
   });
 
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.bottom <=
+      (window.innerHeight + 300 || document.documentElement.clientHeight + 300)
+    );
+  }
+
+  // Inserting values into media container
   carousels.forEach(async ({ id, api_link, type }) => {
+    const mediaContainerEl = document.getElementById(id);
+
     const media = await getData(api_link);
 
     let promises = [];
 
     for (i = 0; i < media.results.length; i += 1) {
-      promises.push(createMediaCard(media.results[i], type));
+      promises.push(createMediaCard(media.results[i], type, true));
     }
 
     const ids = await Promise.all(promises);
 
-    document.getElementById(id).innerHTML = ids.join("");
+    const showImagesInView = () => {
+      if (mediaContainerEl.dataset.showing === "true") return;
+      if (isInViewport(mediaContainerEl)) {
+        mediaContainerEl.innerHTML = ids.join("");
+        mediaContainerEl.dataset.showing = "true";
+      }
+    };
+    showImagesInView();
+
+    ["scroll", "load", "DOMContentLoaded", "resize"].forEach((event) => {
+      document.addEventListener(event, showImagesInView);
+    });
+
+    //document.getElementById(id).innerHTML =
   });
   console.log("crying");
 });

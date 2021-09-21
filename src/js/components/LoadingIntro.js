@@ -1,7 +1,7 @@
 import { devSettings } from "../tools";
 import logo from "./Logo";
 
-const loadingDots = `<div class="loading-dots">
+export const loadingDots = `<div class="loading-dots">
                         <div></div>
                         <div></div>               
                         <div></div>               

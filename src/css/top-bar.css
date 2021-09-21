@@ -155,6 +155,45 @@
   background: rgb(15 15 15);
 }
 
+/* SEARCH RESULTS*/
+
+.search-section {
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.search-results {
+  display: grid;
+  flex-flow: row;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  flex-wrap: wrap;
+  /* grid-template-rows: max-content; */
+  column-gap: 15px;
+  row-gap: 70px;
+  justify-items: center;
+  /* justify-content: center;*/
+}
+
+.search-results .search-card {
+  width: 350px;
+  height: 212px;
+  overflow: visible;
+}
+
+.search-results .search-card h5 {
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  /* bottom: -34px; */
+  font-weight: 400;
+  text-align: left;
+}
+.search-results .search-card img {
+}
+
 /* MOBILE STYLE */
 @media only screen and (max-width: 750px) {
   .top-bar {
