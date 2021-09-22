@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild ./src/js/index.js --outfile=/out/out.js --format=iife --global-name=xyz --bundle --watch"
+    "build": "esbuild ./src/js/index.js --outfile=/out/out.js --minify --format=iife --global-name=xyz --bundle --watch"
   },
   "author": "",
   "license": "ISC",

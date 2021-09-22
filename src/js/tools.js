@@ -32,7 +32,7 @@ const disabled = {
   disableLoading: true,
   showWhosWatching: false,
 };
-export const devSettings = disabled;
+export const devSettings = enabled;
 
 // TMDB API
 
