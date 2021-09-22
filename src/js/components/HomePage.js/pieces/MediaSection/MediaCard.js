@@ -39,7 +39,7 @@ export const createMediaCard = async (
   return /*html*/ `
           <div class="media-card ${searchClass}" data-id="${id}">
           <a
-             href="/media-info/${id}"
+             href="/media-info/${id}/${type}"
              onclick="gotoMediaInfo(this, ${id}, '${type}'); return false;"
              >
                <img

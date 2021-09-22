@@ -6,7 +6,7 @@ const routes = [
     component: ".home-page",
   },
   {
-    path: "/media-info/:id",
+    path: "/media-info/:id/:type",
     component: ".media-info-section",
   },
   {
@@ -23,14 +23,24 @@ export const getCurrentRoute = () => {
 
   let param = null;
   const routeFound = routes.find(({ path, component }) => {
+    console.log(path, "THIS PATH");
+    if (url.includes("media-info") && path.includes("media-info")) {
+      const params = url.split("/");
+      console.log(params, path, "THIS PATH INSIDE MEDIA INFO");
+      if (params[3] === "movie" || params[3] === "tv") {
+        param = params;
+        return true;
+      }
+    }
+
     const match = url.match(`^${path.split(":")[0]}${regex}`);
-    console.log(match);
+    console.log(match, "match");
     if (match) {
       param = match[1];
-
       return true;
     }
   });
+
   console.log(routeFound, "route found");
 
   routeFound.param = param;
@@ -39,16 +49,25 @@ export const getCurrentRoute = () => {
 
 export const showComponentForRoute = () => {
   const { path, component, param } = getCurrentRoute();
-  console.log("taco");
+  console.log(param, "taco");
+
   routes.forEach((route) => {
     console.log(route);
     const el = document.querySelector(route.component);
     const none = "display-none";
     //const view = route.path === path ? "block" : "none";
+    console.log(route.path, path, "route, and path");
     if (route.path === path) {
+      console.log("this is the path");
       el.classList.remove(none);
     } else {
       el.classList.add(none);
+    }
+
+    if (path === "/media-info/:id/:type") {
+      console.log(param, "taco");
+      console.log("running again", param[2], param[3]);
+      gotoMediaInfo({ href: "auto" }, param[2], param[3]);
     }
   });
   //document.querySelector(".media-info-section");

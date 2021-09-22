@@ -35,10 +35,15 @@ const MediaInfoHtml = /*html*/ `
 window.gotoMediaInfo = async (e, id, type) => {
   const location = e.href;
   if (location === window.location.href) return;
-  history.pushState(id, "Generic Streaming Service", location);
+
+  let component = ".media-info-section";
+
+  if (location !== "auto") {
+    history.pushState(id, "Generic Streaming Service", location);
+    component = showComponentForRoute().component;
+  }
 
   // Handle route and
-  const { component, param } = showComponentForRoute();
   const backdropImg = document.querySelector(".backdrop");
   const titleEl = document.getElementById("mediaTitle");
   const mediaDescription = document.getElementById("mediaDescription");
@@ -67,7 +72,6 @@ window.onpopstate = () => {
     document.querySelector(".backdrop").style.display = "none";
     return;
   }
-  gotoMediaInfo();
 };
 export const MediaInfo = {
   html: MediaInfoHtml,
