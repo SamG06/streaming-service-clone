@@ -95,7 +95,7 @@
   padding: 10px;
   height: 44px;
   border: none;
-  width: 800px;
+  width: 600px;
   display: none;
   padding-left: 40px;
   color: white;
@@ -163,6 +163,8 @@
   align-content: center;
   justify-content: center;
   margin-top: 100px;
+  min-height: 100vh;
+  margin-bottom: 200px;
 }
 
 .search-results {

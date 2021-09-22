@@ -16,9 +16,7 @@ const TopBarHTML = /*html*/ `
     ${CloseIcon([])}
     <input type="text" name="search" class="search-input" placeholder="What are you looking for?" id="" />
   </div>
-  <a href="/">
   ${logo}
-  </a>
   <div class="user-profile">
     <div class="user-circle">D</div>
     <p>Default</p>
