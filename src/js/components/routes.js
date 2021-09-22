@@ -65,7 +65,8 @@ export const showComponentForRoute = () => {
     }
 
     if (path === "/media-info/:id/:type") {
-      document.querySelector(".home-page").add(none);
+      document.querySelector(".whos-watching").add(none);
+      document.querySelector(".initial-loading-page").add(none);
       console.log(param, "taco");
       const id = param[2];
       const type = param[3];
