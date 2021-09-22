@@ -65,6 +65,7 @@ export const showComponentForRoute = () => {
     }
 
     if (path === "/media-info/:id/:type") {
+      document.querySelector(".home-page").add(none);
       console.log(param, "taco");
       const id = param[2];
       const type = param[3];
