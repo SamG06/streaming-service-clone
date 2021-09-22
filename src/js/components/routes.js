@@ -66,6 +66,8 @@ export const showComponentForRoute = () => {
 
     if (path === "/media-info/:id/:type") {
       console.log(param, "taco");
+      const id = param[2];
+      const type = param[3];
       console.log("running again", param[2], param[3]);
       gotoMediaInfo({ href: "auto" }, param[2], param[3]);
     }
@@ -75,5 +77,9 @@ export const showComponentForRoute = () => {
   return { component, param };
 };
 window.onpopstate = () => {
+  showComponentForRoute();
+};
+
+window.onload = () => {
   showComponentForRoute();
 };
