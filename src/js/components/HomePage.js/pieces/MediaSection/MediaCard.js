@@ -35,7 +35,9 @@ export const createMediaCard = async (
   const cardImage = miniVersion ? posterLink : bannerLink;
 
   const showName = miniVersion ? "" : `<h5>${media_name}</h5>`;
-
+  if (id == "21484") {
+    return;
+  }
   return /*html*/ `
           <div class="media-card ${searchClass}" data-id="${id}">
           <a

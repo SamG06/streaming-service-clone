@@ -23,7 +23,7 @@ const HeroBannerHTML = /*html*/ `<section class="hero-banner">
     </div>
   </div>
 </div>
-  <video class="hero-video" src="/movie.mp4" autoplay  playsinline muted></video>
+ <img class="main-banner-gif" src="./mainbanner.gif" alt="banner coding movie" />
 </section>`;
 
 const HeroBanner = {

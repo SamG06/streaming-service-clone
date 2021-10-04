@@ -36,7 +36,7 @@ const mediaContainer = (sectionTitle, id) => {
     <div class="media-container">
     <h2>${sectionTitle}</h2>
     ${previousSVG}
-      <div class="media-carousel" id="${id}" data-showing="false">
+      <div class="media-carousel" id="${id}" data-showing="false" style="transform: translateX(0px);">
         ${Array.from(
           { length: 30 },
           () => `<div class="media-card placeholder"></div>`
@@ -70,31 +70,29 @@ const sliderLogic = (e, direction, mediaContainer, roll) => {
 
   const amountShown = () => (mediaContainerWidth - 50) / lastMediaWidth;
 
-  const positionToLastElement = Math.round(
-    mediaContainerWidth -
-      lastMediaPosition +
-      mediaContainerPosition -
-      lastMediaWidth
+  const currentTransform = parseInt(
+    mediaContainer
+      .querySelector(".media-carousel")
+      .style.transform.match(/\d+/)[0]
   );
 
-  const howManyToShow =
-    document.querySelectorAll(".media-container .media-card").length *
-      lastMediaWidth -
-    mediaContainerWidth;
-
-  const sectionLength = amountShown() * lastMediaWidth;
-  // move from width of everything whole number so 4.8 is 4
+  const positionToLastElement = Math.round(
+    mediaContainerWidth - lastMediaPosition - lastMediaWidth - currentTransform
+  );
 
   let nextSection = 0;
   let minus;
-  console.log("ended up here");
+
   if (direction === "next") {
     const newElement = Math.ceil(parseInt(position) + amountShown());
     const elementToGoTo = mediaContainer.querySelector(
       `.media-carousel .media-card:nth-child(${newElement})`
     );
+    console.log(currentTransform, "transform", elementToGoTo);
+
     if (!elementToGoTo) {
       clickingDisabled = false;
+      roll.style.transform = `translateX(-${-positionToLastElement + 50}px)`;
       return;
     }
 
@@ -105,6 +103,7 @@ const sliderLogic = (e, direction, mediaContainer, roll) => {
     minus = "-";
   } else {
     let newElement = parseInt(position) - Math.floor(amountShown());
+    console.log("previous", newElement);
 
     if (newElement < 0) {
       newElement = 0;
@@ -125,10 +124,15 @@ const sliderLogic = (e, direction, mediaContainer, roll) => {
     current = 0;
   }
 
-  roll.style.transform = `translateX(-${current + nextSection}px)`;
-  console.log("ended up here 2");
+  let newSpot = current + nextSection;
+  console.log(newSpot, positionToLastElement, "new");
+  if (-newSpot < positionToLastElement) {
+    newSpot = -positionToLastElement + 50;
+  }
+  roll.style.transform = `translateX(-${newSpot}px)`;
 
-  currentSection = nextSection;
+  console.log("position to last element", positionToLastElement);
+
   setTimeout(() => {
     clickingDisabled = false;
   }, 320);
@@ -179,8 +183,5 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     ["scroll", "load", "DOMContentLoaded", "resize"].forEach((event) => {
       document.addEventListener(event, showImagesInView);
     });
-
-    //document.getElementById(id).innerHTML =
   });
-  console.log("crying");
 });

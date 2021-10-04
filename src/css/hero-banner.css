@@ -3,6 +3,13 @@
   height: 100vh;
   background: white;
   position: relative;
+  user-select: none;
+}
+
+.main-banner-gif {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
 }
 
 .hero-video {

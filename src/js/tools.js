@@ -40,7 +40,9 @@ const getData = async (api_link) => {
   const response = await fetch(`https://api.themoviedb.org/3${api_link}`, {
     method: "GET",
   });
-  return response.json();
+  if (api_link === "https://api.themoviedb.org/3") return;
+  const data = await response.json();
+  return data;
 };
 
 export const api_key = "d208a3fe240766f14fc979daf33da1f3";
@@ -83,5 +85,3 @@ export const detectMoviePage = () => {
   // add check if it is a number send if false
   return movieId;
 };
-
-const pageToShow = () => {};
